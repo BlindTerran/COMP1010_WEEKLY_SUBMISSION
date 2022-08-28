@@ -128,21 +128,22 @@ public class Stage3 {
 	 * return null if the array is null.
 	 */
 	public static int[] getFrequencyTable(int[] data) {
-		// if (data == null) {
-		// 	return null;
-		// } else {
-		// 	int[] frequencyTable = new int[99];
-		// 	//visited array, comparire with the array if visited then not generate occuranceCount
-		// 	int count = 0;
-		// 	for (int i=0; i<data.length; i++) {
-		// 		int visited = -1;
-		// 		for (int k=0; k<data.length; k++) {
-		// 			if (data[i] == data[k]) {
-		// 				visited = data[k];
-		// 				count ++;
-		// 			}
+		// int count = 0;
+		// int n = 1;
+		// int[] visited = new int[n];
+		// for (int i=0; i<data.length; i++) {
+		// 	//put count=0 here to reset for each item
+		// 	for (int k=0; k<data.length; k++) {
+		// 		//check if data[i] is visited
+		// 		if (data[i] == visited[k]) {
+		// 			break;
 		// 		}
-		// 		frequencyTable[i] = count;
+		// 		if (data[i] == data[k]) {
+		// 			count++;
+		// 		}
+		// 	//store data[i] into array visited
+		// 	visited[i] = data[i];
+		// 	n++;
 		// 	}
 		// }
 		return null;

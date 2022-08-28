@@ -13,7 +13,11 @@ public class DeliveryTruck {
 	 * @return total volume of all the boxes
 	 */
 	public int totalVolume() {
-		return 0;
+		int total = 0;
+		for (int i=0; i<boxes.length; i++) {
+			total += boxes[i].volume();
+		}
+		return total;
 	}
 
 	/**
@@ -30,8 +34,33 @@ public class DeliveryTruck {
 	 * so return 6 (4+2)
 	 */
 	public int countIdenticalBoxes() {
-		return 0;
+		int count = 0;
+		int n = 1;
+		Box[] visited = new Box[n];
+		for (int i=0; i<boxes.length; i++) {
+			for (int k=0; k<boxes.length; k++) {
+				//check whether boxes[i] is visited
+				for (int visitedIdx=0; visitedIdx<visited.length; visitedIdx++) {
+					if (boxes[i] == visited[visitedIdx]) {
+						break;
+					} else {
+						if (boxes[i].width == boxes[k].width && boxes[i].height == boxes[k].height && boxes[i].depth == boxes[k].depth) {
+							count++;
+						}
+					}
+				}
+			}
+			//store the visited box into visited array
+			visited[i] = new Box(boxes[i]);
+			n++;
+		}
+		if (count == boxes.length) {
+			return 0;
+		} else {
+			return count;
+		}
 	}
+
 
 	/**
 	 * Do not modify
@@ -53,7 +82,14 @@ public class DeliveryTruck {
 	 * @return true if the truck contains any box with given volume, false otherwise
 	 */
 	public boolean contains(int vol) {
-		return false;
+		boolean flag = false;
+		for (int i=0; i<boxes.length; i++) {
+			if (boxes[i].volume() == vol) {
+				flag = true;
+				break;
+			}
+		}
+		return flag;
 	}
 
 	/**
@@ -66,5 +102,12 @@ public class DeliveryTruck {
 	 * same for boxes[1], boxes[2] ... boxes[boxes.length-1] (all items before adding b)
 	 */
 	public void add(Box b) {
+		Box[] newBoxes = new Box[boxes.length+1];
+		for(int i=0; i<boxes.length; i++) {
+			newBoxes[i] = boxes[i];
+		}
+		//append Box b, call the constructor
+		newBoxes[newBoxes.length-1] = new Box(b);
+		boxes = newBoxes;
 	}
 }
