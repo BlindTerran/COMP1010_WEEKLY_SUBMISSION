@@ -40,6 +40,9 @@ public class Box {
 	 * @param original
 	 */
 	public Box(Box original) {
+		this.width = original.width;
+		this.height = original.height;
+		this.depth = original.depth;
 	}
 
 	/**
@@ -93,42 +96,6 @@ public class Box {
 	 *         second longest sides -> shortest side
 	 */
 	public int compareToAdvanced(Box other) {
-		// if (this.compareTo(other) == 0) {
-		// 	if (this.longestSide() > other.longestSide()) {
-		// 		return 1;
-		// 	} else {
-		// 		if (this.longestSide() < other.longestSide()) {
-		// 			return -1;
-		// 		} else {
-		// 			//longest sides are the same -> second longest side
-		// 			if (this.secondLongest() > other.secondLongest()) {
-		// 				return 1;
-		// 			} else {
-		// 				if (this.secondLongest() < other.secondLongest()) {
-		// 					return -1;
-		// 				} else {
-		// 					//second longest sides are the same -> shortest side
-		// 					if (this.shortest() > other.shortest()) {
-		// 						return 1;
-		// 					} else {
-		// 						if (this.shortest() < other.shortest()) {
-		// 							return -1;
-		// 						} else {
-		// 							//all the criterias have the same value
-		// 							return 0;
-		// 						}
-		// 					}
-		// 				}
-		// 			}
-		// 		}
-		// 	}
-		// }
-		// if (this.compareTo(other) == 1) {
-		// 	return 1;
-		// } else {
-		// 	//neither 1 or 0
-		// 	return -1;
-		// }
 		
 		int result = 0;
 		if (this.compareTo(other) == 1) {
@@ -174,20 +141,7 @@ public class Box {
 	 * @return the longest side of the box
 	 */
 	public int longestSide() {
-		// if (this.width >= this.depth) {
-		// 	if (this.width >= this.height) {
-		// 		return this.width;
-		// 	} else {
-		// 		return this.height;
-		// 	}
-		// } else {
-		// 	//width < depth
-		// 	if (this.depth >= this.height) {
-		// 		return this.depth;
-		// 	} else {
-		// 		return this.height;
-		// 	}
-		// }
+
 		if (this.width >= this.height && this.width >= this.depth) {
 			return this.width;
 		} 
@@ -253,15 +207,6 @@ public class Box {
 	 *         Note that a box cannot fit inside the box of the same dimension.
 	 */
 	public boolean canFitInside(Box b) {
-		// 	if ((this.width* this.height) < (b.width * b.height)) {
-		// 		if ((this.width * this.depth) < (b.width * b.height)) {
-		// 			if ((this.height * this.depth) < (b.height * b.depth)) {
-		// 				return true;
-		// 			}
-		// 		}
-		// 	}
-		// 	return false;
-		// }
 		int rotatedWidth = this.depth;
 		int rotatedHeight = this.width;
 		int rotatedDepth = this.height;
