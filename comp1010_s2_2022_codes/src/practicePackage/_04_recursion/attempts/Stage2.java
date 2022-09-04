@@ -9,7 +9,7 @@ public class Stage2 {
 	 * @return the sum of the even digits in n
 	 */
 	public static int sumEvenDigits(int n) {
-		return 0; //to be completed
+		if ()
 	}
 
 	/**
@@ -26,7 +26,18 @@ public class Stage2 {
 	 * countDigit(0, 0) = 0 (NOT 1)
 	 */
 	public static int countDigit(int n, int d) {
-		return 0; //to be completed
+		if (n == 0) {
+			return 0;
+		}
+		String num = Integer.toString(n);
+		char target = (char)d;
+		if (num.charAt(num.length()-1) == target+'0'){
+			int subCallResult = countDigit(n/10, d);
+			int result = 1 + subCallResult;
+			return result;
+		} else {
+			return countDigit(n/10, d);
+		}
 	}
 
 	/**
@@ -39,7 +50,12 @@ public class Stage2 {
 	 * HINT: multiplication is repeated addition
 	 */
 	public static int product(int a, int b) {
-		return 0; //to be completed
+		if (b == 0) {
+			return 0; 
+		}
+		int subCallResult = product(a, b-1);
+		int result = a+subCallResult;
+		return result;
 	}
 
 	/**
@@ -60,7 +76,14 @@ public class Stage2 {
 	 * tribonacci(7) = 13
 	 */
 	public static int tribonacci(int n) {
-		return 0; //to be completed
+		if (n <= 1) {
+			return 0;
+		}
+		if (n == 2) {
+			return 1;
+		} else {
+			return tribonacci(n-1) + tribonacci(n-2) + tribonacci(n-3);
+		}
 	}
 
 	/**
