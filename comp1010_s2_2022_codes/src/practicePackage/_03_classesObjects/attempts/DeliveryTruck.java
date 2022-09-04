@@ -33,32 +33,43 @@ public class DeliveryTruck {
 	 * and both boxes with one of the sides = 5 are identical
 	 * so return 6 (4+2)
 	 */
+	// public static void storeVisited(int data) {
+	// 	int n = 1; 
+	// 	int[] visited = new int[n];
+	// 	for (int i=0; i<visited.length; i++) {
+	// 		visited[i] = data;
+	// 	}
+	// }
+	// public boolean checkVisited(int data) {
+	// 	for (int i=0; i<sotreVisited().visited.length; i++) {
+
+	// 	}
+	// }
 	public int countIdenticalBoxes() {
-		int count = 0;
-		int n = 1;
-		Box[] visited = new Box[n];
-		for (int i=0; i<boxes.length; i++) {
-			for (int k=0; k<boxes.length; k++) {
-				//check whether boxes[i] is visited
-				for (int visitedIdx=0; visitedIdx<visited.length; visitedIdx++) {
-					if (boxes[i] == visited[visitedIdx]) {
-						break;
-					} else {
-						if (boxes[i].width == boxes[k].width && boxes[i].height == boxes[k].height && boxes[i].depth == boxes[k].depth) {
-							count++;
-						}
-					}
-				}
-			}
-			//store the visited box into visited array
-			visited[i] = new Box(boxes[i]);
-			n++;
-		}
-		if (count == boxes.length) {
-			return 0;
-		} else {
-			return count;
-		}
+		// int count = 0;
+		// int n = 1;
+		// Box[] visited = new Box[n];
+		// for (int i=0; i<boxes.length; i++) {
+		// 	for (int k=0; k<boxes.length; k++) {
+		// 		//check whether boxes[i] is visited
+		// 			if (boxes[i] == visited[]) {
+		// 				break;
+		// 			} else {
+		// 				if (boxes[i].width == boxes[k].width && boxes[i].height == boxes[k].height && boxes[i].depth == boxes[k].depth) {
+		// 					count++;
+		// 				}
+		// 		}
+		// 	}
+		// 	//store the visited box into visited array
+		// 	visited[i] = new Box(boxes[i]);
+		// 	n++;
+		// }
+		// if (count == boxes.length) {
+		// 	return 0;
+		// } else {
+		// 	return count;
+		// }
+		return 0;
 	}
 
 

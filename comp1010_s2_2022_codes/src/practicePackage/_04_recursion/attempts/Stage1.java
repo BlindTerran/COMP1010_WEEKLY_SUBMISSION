@@ -12,7 +12,13 @@ public class Stage1 {
 	 * IMPORTANT: for any integer x, x to the power of 0 is 1 
 	 */
 	public static int power(int x, int n) {
-		return 0; //to be completed
+		//base case
+		if (n == 0) {
+			return 1;
+		}
+		int subCallResult = power(x ,n-1);
+		int result = x*subCallResult;
+		return result;
 	}
 
 	/**
@@ -23,7 +29,16 @@ public class Stage1 {
 	 * return 0 if start is more than stop
 	 */
 	public static int sumRange(int start, int stop) {
-		return 0; //to be completed
+		if (start > stop) {
+			return 0;
+		}
+		//base case
+		if (start == stop) {
+			return stop;
+		}
+		int subCallResult = sumRange(start+1, stop);
+		int result = start + subCallResult;
+		return result;
 	}
 
 	/**
@@ -34,7 +49,16 @@ public class Stage1 {
 	 * return 0 if n is less than or equal to 0
 	 */
 	public static int sumSquares(int n) {
-		return 0; //to be completed
+		if (n <= 0) {
+			return 0;
+		}
+		//base case
+		if (n == 1) {
+			return 1;
+		}
+		int subCallResult = sumSquares(n-1);
+		int result = subCallResult + n*n;
+		return result;
 	}
 
 	/**
@@ -50,7 +74,22 @@ public class Stage1 {
 	 * HINT: if the number is even, ignore it and return sumOdd(n-1)
 	 */
 	public static int sumOdd(int n) {
-		return 0; //to be completed
+		if (n <= 0) {
+			return 0;
+		}
+		//base case
+		if (n == 1) {
+			return 1;
+		}
+		if (n%2 == 0) {
+			//if number is even
+			return sumOdd(n-1);
+		} else {
+			//if number is odd
+			int subCallResult = sumOdd(n-1);
+			int result = subCallResult + n;
+			return result;
+		}
 	}
 
 	/**
@@ -66,7 +105,20 @@ public class Stage1 {
 	 * HINT: If n is even, ignore it and return sumOddSquares(n-1)
 	 */
 	public static int sumOddSquares(int n) {
-		return 0; //to be completed
+		if (n <= 0) {
+			return 0;
+		}
+		//base case
+		if (n == 1) {
+			return 1;
+		}
+		if (n%2 == 0) {
+			return sumOddSquares(n-1);
+		} else {
+			int subCallResult = sumOddSquares(n-1);
+			int result = subCallResult + n*n;
+			return result;
+		}
 	}
 
 	/**
@@ -81,8 +133,21 @@ public class Stage1 {
 	 * HINT: you can check that a char ch is a digit using Character.isDigit(ch)
 	 */
 	public static boolean isNumeric(String str) {
-		return false; //to be completed
+		if (str == null) {
+			return false;
+		}
+		if (str.length() == 0) {
+			return true;
+		}
+		if (Character.isDigit(str.charAt(0))) {
+			return isNumeric(str.substring(1));
+		} else {
+			return false;
+		}
+	
 	}
+
+
 
 	/**
 	 * 
@@ -93,6 +158,20 @@ public class Stage1 {
 	 * IMPORTANT: You may not call the methods indexOf or lastIndexOf or contains from String class
 	 */
 	public static boolean containsStringString(String str, String target) {
-		return false; //to be completed
+		if (str == null || target == null) {
+			return false;
+		}
+		if (target.isEmpty()) {
+			return true;
+		}
+		if (str.isEmpty()) {
+			return false;
+		}
+		if (str.charAt(0) == target.charAt(0)) {
+			// String str_reduced = str.substring(1);
+			// String target_reduced = target.substring(1);
+			return containsStringString(str.substring(1), target.substring(1));
+		}
+		return containsStringString(str.substring(1), target);
 	}
 }
