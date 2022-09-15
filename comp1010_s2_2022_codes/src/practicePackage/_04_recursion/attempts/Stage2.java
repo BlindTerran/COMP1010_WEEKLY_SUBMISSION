@@ -9,7 +9,16 @@ public class Stage2 {
 	 * @return the sum of the even digits in n
 	 */
 	public static int sumEvenDigits(int n) {
-		if ()
+		if (n == 0) {
+			return 0;
+		}
+		int reminder = n%10;
+		if (reminder%2 == 0) {
+			int subCallResult = sumEvenDigits(n/10);
+			int result = Math.abs(reminder)+subCallResult;
+			return result;
+		}
+		return sumEvenDigits(n/10);
 	}
 
 	/**

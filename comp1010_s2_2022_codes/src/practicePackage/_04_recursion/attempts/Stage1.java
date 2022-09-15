@@ -12,12 +12,11 @@ public class Stage1 {
 	 * IMPORTANT: for any integer x, x to the power of 0 is 1 
 	 */
 	public static int power(int x, int n) {
-		//base case
-		if (n == 0) {
+		if (n == 0) 
 			return 1;
-		}
-		int subCallResult = power(x ,n-1);
-		int result = x*subCallResult;
+		int contribution = x;
+		int subCallResult = power(x, n-1);
+		int result = contribution * subCallResult;
 		return result;
 	}
 
@@ -29,15 +28,11 @@ public class Stage1 {
 	 * return 0 if start is more than stop
 	 */
 	public static int sumRange(int start, int stop) {
-		if (start > stop) {
+		if (start > stop)
 			return 0;
-		}
-		//base case
-		if (start == stop) {
-			return stop;
-		}
+		int contribution = start;
 		int subCallResult = sumRange(start+1, stop);
-		int result = start + subCallResult;
+		int result = contribution + subCallResult;
 		return result;
 	}
 
@@ -49,15 +44,13 @@ public class Stage1 {
 	 * return 0 if n is less than or equal to 0
 	 */
 	public static int sumSquares(int n) {
-		if (n <= 0) {
+		if (n <= 0)
 			return 0;
-		}
-		//base case
-		if (n == 1) {
+		if (n == 0)
 			return 1;
-		}
+		int contribution = n;
 		int subCallResult = sumSquares(n-1);
-		int result = subCallResult + n*n;
+		int result = subCallResult + contribution*contribution;
 		return result;
 	}
 
@@ -105,19 +98,15 @@ public class Stage1 {
 	 * HINT: If n is even, ignore it and return sumOddSquares(n-1)
 	 */
 	public static int sumOddSquares(int n) {
-		if (n <= 0) {
+		if (n <= 0)
 			return 0;
-		}
-		//base case
-		if (n == 1) {
-			return 1;
-		}
-		if (n%2 == 0) {
-			return sumOddSquares(n-1);
-		} else {
+		if (n%2 != 0) {
+			int contribution = n;
 			int subCallResult = sumOddSquares(n-1);
-			int result = subCallResult + n*n;
+			int result = subCallResult + contribution*contribution;
 			return result;
+		} else {
+			return sumOddSquares(n-1);
 		}
 	}
 
@@ -133,18 +122,17 @@ public class Stage1 {
 	 * HINT: you can check that a char ch is a digit using Character.isDigit(ch)
 	 */
 	public static boolean isNumeric(String str) {
-		if (str == null) {
+		if (str == null)
 			return false;
-		}
-		if (str.length() == 0) {
+		if (str.isEmpty())
 			return true;
-		}
-		if (Character.isDigit(str.charAt(0))) {
-			return isNumeric(str.substring(1));
+		char first = str.charAt(0);
+		if (Character.isDigit(first)) {
+			String reduced = str.substring(1);
+			return isNumeric(reduced);
 		} else {
 			return false;
 		}
-	
 	}
 
 
@@ -158,20 +146,27 @@ public class Stage1 {
 	 * IMPORTANT: You may not call the methods indexOf or lastIndexOf or contains from String class
 	 */
 	public static boolean containsStringString(String str, String target) {
-		if (str == null || target == null) {
-			return false;
-		}
+		boolean flag = false;
+		//preflight check
+		if (str == null || target == null)
+		return false;
+		//terminal case
 		if (target.isEmpty()) {
-			return true;
+			flag = true;
+			return flag;
 		}
-		if (str.isEmpty()) {
+		if (str.isEmpty())
 			return false;
+		//recursive case
+		char targetFirst = target.charAt(0);
+		char strFirst = str.charAt(0);
+		if (targetFirst == strFirst) {
+			String strReduced = str.substring(1);
+			String targetReduced = target.substring(1);
+			return containsStringString(strReduced, targetReduced);
+		} else {
+			String strReduced = str.substring(1);
+			return containsStringString(strReduced, target);
 		}
-		if (str.charAt(0) == target.charAt(0)) {
-			// String str_reduced = str.substring(1);
-			// String target_reduced = target.substring(1);
-			return containsStringString(str.substring(1), target.substring(1));
-		}
-		return containsStringString(str.substring(1), target);
 	}
 }
