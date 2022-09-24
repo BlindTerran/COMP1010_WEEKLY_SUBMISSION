@@ -9,16 +9,20 @@ public class Stage2 {
 	 * @return the sum of the even digits in n
 	 */
 	public static int sumEvenDigits(int n) {
-		if (n == 0) {
+		if (n == 0)
 			return 0;
-		}
-		int reminder = n%10;
-		if (reminder%2 == 0) {
+		int remainder = n%10;
+		if (remainder%2 == 0) {
+			if (remainder < 0) {
+				remainder = -remainder;
+			}
+			int contribution = remainder;
 			int subCallResult = sumEvenDigits(n/10);
-			int result = Math.abs(reminder)+subCallResult;
+			int result = contribution + subCallResult;
 			return result;
+		} else {
+			return sumEvenDigits(n/10);
 		}
-		return sumEvenDigits(n/10);
 	}
 
 	/**
@@ -35,14 +39,16 @@ public class Stage2 {
 	 * countDigit(0, 0) = 0 (NOT 1)
 	 */
 	public static int countDigit(int n, int d) {
-		if (n == 0) {
+		if (n == 0) 
 			return 0;
-		}
-		String num = Integer.toString(n);
-		char target = (char)d;
-		if (num.charAt(num.length()-1) == target+'0'){
-			int subCallResult = countDigit(n/10, d);
-			int result = 1 + subCallResult;
+		int target = n%10;
+		if (target < 0) 
+			target = -target;
+		if (target == d) {
+			int contribution = 1;
+			int reduced = n/10;
+			int subCallResult = countDigit(reduced, d);
+			int result = contribution + subCallResult;
 			return result;
 		} else {
 			return countDigit(n/10, d);
@@ -59,11 +65,11 @@ public class Stage2 {
 	 * HINT: multiplication is repeated addition
 	 */
 	public static int product(int a, int b) {
-		if (b == 0) {
-			return 0; 
-		}
+		if (b == 0)
+			return 0;
+		int contribution = a;
 		int subCallResult = product(a, b-1);
-		int result = a+subCallResult;
+		int result = contribution + subCallResult;
 		return result;
 	}
 
@@ -85,14 +91,11 @@ public class Stage2 {
 	 * tribonacci(7) = 13
 	 */
 	public static int tribonacci(int n) {
-		if (n <= 1) {
+		if (n < 2)
 			return 0;
-		}
-		if (n == 2) {
+		if (n == 2)
 			return 1;
-		} else {
-			return tribonacci(n-1) + tribonacci(n-2) + tribonacci(n-3);
-		}
+		return tribonacci(n-1) + tribonacci(n-2) + tribonacci(n-3);
 	}
 
 	/**
@@ -101,7 +104,18 @@ public class Stage2 {
 	 * @return the smallest digit in the value passed
 	 */
 	public static int smallestDigit(int n) {
-		return 0;
+		if (n < 0)
+			n = -n;
+		//terminal case: when n has one digit remains
+		if (n < 10)
+			return n;
+		int remainder = n%10;
+		int subCallResult = smallestDigit(n/10);
+		if (remainder < subCallResult) {
+			return remainder;
+		} else {
+			return subCallResult;
+		}
 	}
 
 	/**
@@ -111,7 +125,22 @@ public class Stage2 {
 	 * return 0 if the number doesn't have any even digits
 	 */
 	public static int smallestEvenDigit(int n) {
-		return 0;	
+		if (n < 0)
+			n = -n;
+		if (n == 0)
+			return 10;
+		if ((n%10)%2 == 0) {
+			//the last digit is even 
+			int remainder = n%10;
+			int subCallResult = smallestEvenDigit(n/10);
+			if (remainder < subCallResult) {
+				return remainder;
+			} else {
+				return subCallResult;
+			}
+		} else {
+			return smallestEvenDigit(n/10);
+		}
 	}
 
 	/**
@@ -135,6 +164,14 @@ public class Stage2 {
 	 * return 0 if the number is 0.
 	 */
 	public static int smallestDigitLocation(int n) {
-		return 0;
+		if (n < 0)
+			n = -n;
+		if (n == 0)
+			return 0;
+		int smallestDigit = smallestDigit(n);
+		if (n%10 == smallestDigit) {
+			return 1;
+		}
+		return smallestDigitLocation(n/10) + 1;
 	}
 }
