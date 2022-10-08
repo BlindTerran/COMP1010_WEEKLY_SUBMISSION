@@ -11,12 +11,35 @@ public class Stage3 {
 	 * note: the least significant digit is at location 1, the secon-least significant digit is at location 2, and so on.
 	 */
 	public static int removeDigit(int n, int loc) {
-		return 0; //to be completed
+		if (loc < 1 ) {
+			return n;
+		}
+		if (loc == 1) {
+			return n/10;
+		}
+		return removeDigit(n/10, loc-1) * 10 + n%10;
+		
+		
 	}
 
 	
 	public static double powerV2(int x, int n) {
-		return 0; //to be completed
+		return powerV2Helper(x, n, 1);
+	}
+
+	public static double powerV2Helper(int x, int n , int current) {
+		if (n <= 0) {
+			if(n == 0) {
+				return 1.0/current;
+			}
+			return powerV2Helper(x, n+1, current*x);
+		}
+		else {
+			if (n == 0) {
+				return current;
+			}
+			return powerV2Helper(x, n-1, current*x);
+		}
 	}
 
 	/**
@@ -30,14 +53,39 @@ public class Stage3 {
 	 * convert(1905, 8) returns "3561" since 1905 in base-8 is 3561 (3*512 + 5*64 + 6*8 + 1*1 = 1905)
 	 */
 	public static String convert(int n, int destBase) {
-		return "0"; //to be completed
+		// if (n == 0) {
+		// 	return "";
+		// }
+		// return convert(n/destBase, destBase) + n%destBase;
+
+		//doesn's pass the first test
+		return "";
 	}
 
-	
+		/**
+	 * 
+	 * @param n
+	 * @param d
+	 * @return the number of "weighted" count of the digit d in number n. 
+	 * If d is preceded by another occurrence of d, the weight for that occurrence be 2, otherwise 1.
+	 */
 	public static int countWeighted(int n, int d) {
 		return 0; //to be completed
 	}
 
+	public static int countNumberOfDigit(int n) {
+		if (n <= 0) {
+			if (n > -9) {
+				return 1;
+			}
+			return 1 + countNumberOfDigit(n/10); 
+		} 
+
+		if (n < 9 &&  n > 0) {
+			return 1;
+		}
+		return 1 + countNumberOfDigit(n/10);
+	}
 	/**
 	 * 
 	 * @param n
@@ -45,7 +93,21 @@ public class Stage3 {
 	 * you may, and should use functions from stages 1 and 2
 	 */
 	public static int withoutFirstDigit(int n) {
-		return 0; //to be completed
+		if (n < 0 && n > -9) {
+			return 0;
+		}
+		if (n < 9 && n >= 0) {
+			return 0;
+		}
+		int digitCount = countNumberOfDigit(n);
+		return removeFirstDigit(n, digitCount);
+	}
+	
+	public static int removeFirstDigit(int num, int idx) {
+		if (idx == 1) {
+			return num/10;
+		}
+		return removeFirstDigit(num/10, idx-1)*10 + num%10;
 	}
 
 	/**

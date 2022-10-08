@@ -65,6 +65,17 @@ public class Stage3Test {
 		assertEquals("3561", Stage3.convert(1905, 8));
 		currentMethodName = new Throwable().getStackTrace()[0].getMethodName();
 	}
+	@Test
+	public void testCountNumberOfDigit() {
+		assertEquals(3, Stage3.countNumberOfDigit(123));
+		assertEquals(3, Stage3.countNumberOfDigit(-123));
+	}
+
+	@Test
+	public void testRemoveFirstDigit() {
+		assertEquals(345, Stage3.removeFirstDigit(2345, 4));
+		assertEquals(-345, Stage3.removeFirstDigit(-2345, 4));
+	}
 
 	@Test @Graded(description = "countweighted", marks = 1)
 	public void testCountWeighted()  {
