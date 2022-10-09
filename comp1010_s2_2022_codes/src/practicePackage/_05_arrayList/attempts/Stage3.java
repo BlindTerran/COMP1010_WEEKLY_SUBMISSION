@@ -31,8 +31,18 @@ public class Stage3 {
 	 * TIP: use remove method and use the debugger to ensure that the right item is being removed
 	 */
 	public static void removeNegatives(ArrayList<Integer> list) {
-		//to be completed
-	}
+		if(list != null)
+		{
+		 for(int i=0; i<list.size();) {
+		  if(list.get(i)<0) {
+		   list.remove(i);
+		  }
+		  else {
+		   i++;
+		  }
+		 }
+		}
+	   } 
 
 	/**
 	 * 
@@ -41,7 +51,10 @@ public class Stage3 {
 	 * return false if list is null or if it contains less than 3 items
 	 */
 	public static boolean threeInARow(ArrayList<Integer> list, int target) {
-		return false; //to be completed
+		if (list == null || list.size() < 3) {
+			return false;
+		}
+		return false;
 	}
 
 	/**
@@ -53,7 +66,18 @@ public class Stage3 {
 	 * TIP: use of methods indexOf and lastIndexOf will make your life oh-so-easy
 	 */
 	public static boolean allUnique(ArrayList<Integer> list) {
-		return false; //to be completed
+		if (list == null) {
+			return false;
+		}
+		int count = 0;
+		for (int i=0; i<list.size(); i++) {
+			for (int k=0; k<list.size(); k++) {
+				if (i != k && list.get(i) == list.get(k)) {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 
 	/**
@@ -81,7 +105,20 @@ public class Stage3 {
 	 * return false if either of list passed is null
 	 */
 	public static boolean identical(ArrayList<Integer> a, ArrayList<Integer> b) {
-		return false; //to be completed
+		if (a == null || b == null) {
+			return false;
+		}
+		if (a.size() != b.size()) {
+			return false;
+		}
+		boolean flag = true;
+		for (int i=0; i<a.size(); i++) {
+			if (a.get(i) != b.get(i)) {
+				flag = false;
+				break;
+			} 
+		} 
+		return flag;
 	}
 
 	/**
@@ -93,7 +130,20 @@ public class Stage3 {
 	 * return false if either of list passed is null
 	 */
 	public static boolean same(ArrayList<Integer> a, ArrayList<Integer> b) {
-		return false; //to be completed
+		if (a == null || b == null) {
+			return false;
+		}
+		if (a.size() != b.size()) {
+			return false;
+		}
+		boolean flag = true;
+		for (int i=0; i<a.size(); i++) {
+			if (!a.contains(b.get(i))) {
+				flag = false;
+				break;
+			}
+		}
+		return flag;
 	}
 
 	/**
@@ -103,7 +153,14 @@ public class Stage3 {
 	 * return null if n is less than 0
 	 */
 	public static ArrayList<Integer> generate(int n) {
-		return null; //to be completed
+		if (n < 0) {
+			return null;
+		}
+		ArrayList<Integer> result = new ArrayList<Integer>();
+		for (int i=1; i<=n; i++) {
+			result.add(i);
+		}
+		return result;
 	}
 
 	/**

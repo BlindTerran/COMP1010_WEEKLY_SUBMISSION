@@ -80,7 +80,6 @@ public class Stage3 {
 			}
 			return 1 + countNumberOfDigit(n/10); 
 		} 
-
 		if (n < 9 &&  n > 0) {
 			return 1;
 		}
