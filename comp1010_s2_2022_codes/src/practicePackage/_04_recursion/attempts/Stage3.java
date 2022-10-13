@@ -58,7 +58,7 @@ public class Stage3 {
 		// }
 		// return convert(n/destBase, destBase) + n%destBase;
 
-		//doesn's pass the first test
+		//suspended, doesn's pass the first test
 		return "";
 	}
 
@@ -156,3 +156,4 @@ public class Stage3 {
 		return 0; //to be completed
 	}
 }
+

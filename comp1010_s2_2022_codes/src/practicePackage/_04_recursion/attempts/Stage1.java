@@ -12,12 +12,10 @@ public class Stage1 {
 	 * IMPORTANT: for any integer x, x to the power of 0 is 1 
 	 */
 	public static int power(int x, int n) {
-		if (n == 0) 
+		if (n == 0) {
 			return 1;
-		int contribution = x;
-		int subCallResult = power(x, n-1);
-		int result = contribution * subCallResult;
-		return result;
+		}
+		return x*power(x, n-1);
 	}
 
 	/**
@@ -168,5 +166,12 @@ public class Stage1 {
 			String strReduced = str.substring(1);
 			return containsStringString(strReduced, target);
 		}
+	}
+
+	public static int sumInRange(int low, int high) {
+		if (low > high) {
+			return 0;
+		}
+		return low+sumInRange(low+1, high);
 	}
 }
