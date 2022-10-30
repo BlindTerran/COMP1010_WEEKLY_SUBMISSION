@@ -6,7 +6,7 @@ public class MyLinkedList {
 	public Node head;
 	
 
-
+ 
 	//DO NOT MODIFY
 	public MyLinkedList() {
 		head = null;
@@ -32,6 +32,24 @@ public class MyLinkedList {
 		Node temp = new Node(val, null);
 		temp.next = head;
 		head = temp;
+	}
+
+	public void addAtBack(int val) {
+		if (isEmpty()) {
+			Node temp = new Node(val, null);
+			head = temp;
+
+			// terminal method
+			return ;
+		}
+
+		// when list is not empty, append the new node
+		Node current = head;
+		while (current.next != null) {
+			current = current.next;
+		}
+
+		current.next = new Node(val, null);
 	}
 
 	//DO NOT MODIFY
@@ -74,7 +92,16 @@ public class MyLinkedList {
 	 * but not at indices [... -2, -1] or [5, 6, ..]
 	 */
 	public boolean canInsertItemAt(int idx) {
-		return false; //to be completed
+		// if list is empty, new item can only be inserted at idx 0
+		if (isEmpty()) {
+			if (idx == 0) { 
+				return true;
+			} 
+			else {
+				return false;
+			}
+		}
+		return idx >= 0 && idx <= size();
 	}
 
 	/**
@@ -82,7 +109,18 @@ public class MyLinkedList {
 	 * @return the sum of all positive items (0 if the list is empty)
 	 */
 	public int totalPositives() {
-		return 0; //to be completed
+		if (isEmpty()) return 0;
+		Node current = head;
+		int total = 0;
+		while (current != null) {
+			if (current.data > 0) {
+				total += current.data;
+			}
+
+			// change the current reference to the next item
+			current = current.next;
+		}
+		return total;
 	}
 
 	/**
@@ -91,7 +129,17 @@ public class MyLinkedList {
 	 * (0 if the list is empty)
 	 */
 	public int countOccurrences(int target) {
-		return 0; //to be completed
+		if (isEmpty()) return 0; 
+		Node current = head;
+		int count = 0;
+		while (current != null) {
+			if (current.data == target) {
+				count ++;
+			}
+			current = current.next;
+		}
+		return count;
+
 	}
 
 	/**
@@ -101,7 +149,16 @@ public class MyLinkedList {
 	 * 
 	 */
 	public boolean allEven() {
-		return false; //to be completed
+		if (isEmpty()) return true;
+		Node current = head;
+		while (current != null) {
+			// when find one is not even, return false straight away
+			if (current.data % 2 != 0) {
+				return false;
+			}
+			current = current.next;
+		}
+		return true;
 	}
 
 	/**
@@ -114,7 +171,16 @@ public class MyLinkedList {
 	 * return false if list is empty
 	 */
 	public boolean containsInRange(int low, int high) {
-		return false; //to be completed
+		if (isEmpty()) return false;
+
+		Node current = head;
+		while (current != null) {
+			if (current.data >= low && current.data <= high) {
+				return true;
+			} 
+			current = current.next;
+		}
+		return false;
 	}
 
 	/**
@@ -126,7 +192,17 @@ public class MyLinkedList {
 	 * list represents [0, 0, 0, 0, return 0
 	 */
 	public Integer highest() {
-		return null; //to be completed
+		if (isEmpty()) return null;
+
+		int highest = 0;
+		Node current = head;
+		while (current != null) {
+			if (highest < current.data) {
+				highest = current.data;
+			}
+			current = current.next;
+		}
+		return highest;
 	}
 
 	/**
@@ -136,7 +212,29 @@ public class MyLinkedList {
 	 * @return item at given index if index is valid, null otherwise
 	 */
 	public Integer get(int idx) {
-		return null; //to be completed
+		if (isEmpty()) return null;
+		
+		//check if idx valid using helper method
+		if (! indexValidation(idx)) return null;
+
+		Node current = head;
+		for (int i=0; i<idx; i++) {
+			current = current.next;
+		}
+		return current.data;
+
+	}
+
+	/**
+	 * Helper method to validate the index
+	 * If the index is less than zero or greater than or equal to the size of the list, return false,
+	 * otherwise return true. (Auto-generated)
+	 * 
+	 * @param idx The index to be validated.
+	 * @return The method is returning a boolean value.
+	 */
+	public boolean indexValidation(int idx) {
+		return (idx >= 0 && idx < size());
 	}
 
 	/**
@@ -148,7 +246,33 @@ public class MyLinkedList {
 	 * @return item remove, null if idx invalid
 	 */
 	public Integer remove(int idx) {
-		return null; //to be completed
+		if (isEmpty()) return null;
+		if (! indexValidation(idx)) return null;
+
+		// in case of removing the first item
+		if (idx == 0) {
+
+			// back-up the item to be remvoed
+			int itemRemoved = head.data;
+
+			// dereference the first node 
+			head = head.next;
+			return itemRemoved;
+		}
+
+		// in case of not the first item to remove
+		Node current = head;
+
+		// update current to the node before the one to be removed
+		for (int i=0; i<idx-1; i++) {
+			current = current.next;
+		}
+			// back-up the item to be remvoed
+			int itemRemoved = current.next.data;
+
+			// dereference the node, pointer at the next of the item to be removed
+			current.next = current.next.next;
+			return itemRemoved;
 	}
 
 	/**
@@ -166,7 +290,28 @@ public class MyLinkedList {
 	 * list represents [10, 70, 20, 50, 90]
 	 */
 	public MyLinkedList join(MyLinkedList other) {
-		return null; //to be completed
+		MyLinkedList newList = new MyLinkedList();
+
+		// in case of t he calling list is empty
+		if (isEmpty()) {
+
+			//make reference pointing at the second list right away
+			newList.head = other.head; 
+			return newList;
+		}
+		
+		Node current = this.head;
+		while (current != null) {
+			newList.addAtBack(current.data);
+			current = current.next;
+		}
+
+		Node current2 = other.head;
+		while (current2 != null) {
+			newList.addAtBack(current2.data);
+			current2 = current2.next;
+		}
+		return newList;
 	}
 
 	/**
@@ -197,6 +342,42 @@ public class MyLinkedList {
 	 * return false
 	 */
 	public boolean same(MyLinkedList other) {
-		return false; //to be completed
+		if (this.isEmpty() && other.isEmpty()) return true;
+		if (this.size() != other.size()) return false;
+
+		Node current1 = this.head;
+		while (current1 != null) {
+			
+			boolean found = false;
+
+			//reset start point for inner loop
+			Node current2 = other.head;
+			while (current2.next != null) {
+
+				//if found a match, break and look for the next match
+				if (current1.data == current2.data) {
+					found = true;
+					break;
+				}
+
+				//increment the inner loop
+				current2 = current2.next;
+			}
+			// current2 now pointing at the last item
+			if (!found && current2.data != current1.data) {
+				return false;
+			}
+
+			current1 = current1.next;
+		}
+		return true;
+	}
+
+	public int dummyGetlastItem() {
+		Node current = head;
+		for (int i=0; i<size()-1; i++) {
+			current = current.next;
+		}
+		return current.data;
 	}
 }
