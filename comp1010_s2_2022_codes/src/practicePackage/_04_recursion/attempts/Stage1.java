@@ -167,11 +167,4 @@ public class Stage1 {
 			return containsStringString(strReduced, target);
 		}
 	}
-
-	public static int sumInRange(int low, int high) {
-		if (low > high) {
-			return 0;
-		}
-		return low+sumInRange(low+1, high);
-	}
 }

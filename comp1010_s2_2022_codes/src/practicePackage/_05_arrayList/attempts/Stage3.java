@@ -31,17 +31,13 @@ public class Stage3 {
 	 * TIP: use remove method and use the debugger to ensure that the right item is being removed
 	 */
 	public static void removeNegatives(ArrayList<Integer> list) {
-		if(list != null)
-		{
-		 for(int i=0; i<list.size();) {
-		  if(list.get(i)<0) {
-		   list.remove(i);
-		  }
-		  else {
-		   i++;
-		  }
-		 }
-		}
+		ArrayList<Integer> arrList = new ArrayList<Integer>(list);
+			for (int i=0; i<arrList.size(); i++) {
+				if (arrList.get(i) < 0) {
+					arrList.remove(i);
+				}
+			}
+			list = arrList;
 	   } 
 
 	/**

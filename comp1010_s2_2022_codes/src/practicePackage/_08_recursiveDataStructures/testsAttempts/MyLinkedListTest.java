@@ -202,14 +202,14 @@ public class MyLinkedListTest {
 		list4.addAtFront(0);
 		//0 -> -15 -> 7 -> 12 -> 3
 
-		assertTrue(emptyList.same(emptyList2));
-		assertFalse(emptyList.same(singleItemList));
-		assertFalse(list1.same(list2));
+		// assertTrue(emptyList.same(emptyList2));
+		// assertFalse(emptyList.same(singleItemList));
+		// assertFalse(list1.same(list2));
 
-		ensureNoModify();
+		// ensureNoModify();
 
-		emptyList.addAtFront(10); //emptyList is now [10]
-		assertTrue(emptyList.same(singleItemList));
+		// emptyList.addAtFront(10); //emptyList is now [10]
+		// assertTrue(emptyList.same(singleItemList));
 		
 		assertTrue(list1.same(list3));
 		//list1 = 12 -> 0 -> 3 -> -15 -> 7
@@ -226,6 +226,23 @@ public class MyLinkedListTest {
 		currentMethodName = new Throwable().getStackTrace()[0].getMethodName();
 	}
 
+	@Test
+	public void testDummy() {
+		assertEquals(7, list1.dummyGetlastItem());
+	}
+
+	@Test
+	public void testAddAtBack() {
+		singleItemList.addAtBack(3);
+		assertEquals("[10, 3]", singleItemList.toString());
+
+		list1.addAtBack(4);
+		assertEquals("[12, 0, 3, -15, 7, 4]", list1.toString());
+
+		emptyList.addAtBack(3);
+		emptyList.addAtBack(4);
+		assertEquals("[3, 4]", emptyList.toString());
+	}
 
     @AfterEach
 	public void logSuccess() throws NoSuchMethodException, SecurityException {

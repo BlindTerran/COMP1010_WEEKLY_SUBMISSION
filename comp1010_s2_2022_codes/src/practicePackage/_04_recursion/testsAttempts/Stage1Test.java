@@ -108,11 +108,6 @@ public class Stage1Test  {
 		currentMethodName = new Throwable().getStackTrace()[0].getMethodName();
 	}
 
-	@Test
-	public void testInRange() {
-		assertEquals(12, Stage1.sumInRange(3, 5));
-	}
-
     @AfterEach
 	public void logSuccess() throws NoSuchMethodException, SecurityException {
 		if (currentMethodName != null && !methodsPassed.contains(currentMethodName)) {
